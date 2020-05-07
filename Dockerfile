@@ -7,11 +7,9 @@ ARG             VERSION
 FROM            golang:1.14-alpine as builder
 RUN             apk add --no-cache git gcc musl-dev make
 ENV             GO111MODULE=on
-WORKDIR         /go/src/moul.io/actions-base
-COPY            go.* ./
-RUN             go mod download
-COPY            . ./
-RUN             make install
+RUN             go get -u \
+                  golang.org/x/tools/cmd/goimports
+
 
 # minimalist runtime
 FROM alpine:3.11
@@ -26,6 +24,6 @@ LABEL           org.label-schema.build-date=$BUILD_DATE \
                 org.label-schema.schema-version="1.0" \
                 org.label-schema.cmd="docker run -i -t --rm moul/actions-base" \
                 org.label-schema.help="docker exec -it $CONTAINER actions-base --help"
-COPY            --from=builder /go/bin/actions-base /bin/
+COPY            --from=builder /go/bin/goimports /bin/
 ENTRYPOINT      ["/bin/actions-base"]
 #CMD             []
