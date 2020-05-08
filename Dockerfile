@@ -24,6 +24,7 @@ LABEL           org.label-schema.build-date=$BUILD_DATE \
                 org.label-schema.schema-version="1.0" \
                 org.label-schema.cmd="docker run -i -t --rm moul/actions-base" \
                 org.label-schema.help="docker exec -it $CONTAINER actions-base --help"
+RUN             apk add --no-cache jq curl
 COPY            --from=builder /go/bin/goimports /bin/
 ENTRYPOINT      ["/bin/actions-base"]
 #CMD             []
