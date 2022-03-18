@@ -12,7 +12,7 @@ RUN             go get -u \
 
 
 # minimalist runtime
-FROM alpine:3.15.0
+FROM alpine:3.15.1
 LABEL           org.label-schema.build-date=$BUILD_DATE \
                 org.label-schema.name="actions-base" \
                 org.label-schema.description="" \
