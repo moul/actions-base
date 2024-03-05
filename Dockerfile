@@ -4,7 +4,7 @@ ARG             VCS_REF
 ARG             VERSION
 
 # build
-FROM            golang:1.18.1-alpine as builder
+FROM            golang:1.22.1-alpine as builder
 RUN             apk add --no-cache git gcc musl-dev make
 ENV             GO111MODULE=on
 RUN             go get -u \
@@ -12,7 +12,7 @@ RUN             go get -u \
 
 
 # minimalist runtime
-FROM alpine:3.16.0
+FROM alpine:3.19.1
 LABEL           org.label-schema.build-date=$BUILD_DATE \
                 org.label-schema.name="actions-base" \
                 org.label-schema.description="" \
